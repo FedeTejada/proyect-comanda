@@ -33,20 +33,12 @@ def main():
             print(f"Total a pagar: ${total:.2f}")
         elif opcion == "5":
             cliente, hora, cadete = compra.cierre_compra()
-            if cadete.lower() == "si":
-                print("COMPRA CONFIRMADA\n")
-                print(f"N° compra: {num_compra}")
-                print(f"Cliente: {cliente}")
-                print(f"Hora: {hora}")
-                print("¿Cadete?: No)")
-                print(f"Total: ${total:.2f}")
-            else:
-                print("COMPRA CONFIRMADA\n")
-                print(f"N° compra: {num_compra}")
-                print(f"Cliente: {cliente}")
-                print(f"Hora: {hora}")
-                print("¿Cadete?: No)")
-                print(f"Total: ${total:.2f}")
+            print("COMPRA CONFIRMADA\n")
+            print(f"N° compra: {num_compra}")
+            print(f"Cliente: {cliente}")
+            print(f"Hora: {hora}")
+            print(f"¿Cadete?: {cadete}")
+            print(f"Total: ${total:.2f}")
             num_compra += 1
             # ACA HAY QUE VER COMO REINICIAR TODAS LAS VARIABLES PARA UNA PROXIMA COMPRA
             break

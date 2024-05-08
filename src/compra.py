@@ -24,5 +24,7 @@ class Compra:
         cliente = input('Nombre del cliente: ')
         hora = input('¿A qué hora le gustaría retirar la comida? ')
         cadete = input('¿Desea cadete? ')
+        if cadete.lower() == 'si':
+            cadete = 'Si, a ' + input('¿A qué direccion? ')
         return cliente, hora, cadete
 
