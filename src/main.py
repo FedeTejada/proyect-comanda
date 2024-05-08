@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from pedido import Pedido, Menu
+from menu import Menu
+from compra import Compra
 
 def main():
     menu = Menu()
-    pedido = Pedido()
-    num_pedido = 1
+    compra = Compra()
+    num_compra = 1
 
     while True:
         print("\n1. Mostrar Menú")
@@ -23,21 +24,31 @@ def main():
             menu.mostrar_menu()
             item = input("\nIngrese el ítem que desea agregar: ").lower()
             cantidad = int(input("Ingrese la cantidad: "))
-            pedido.agregar_item(item, cantidad)
+            compra.agregar_item(item, cantidad)
             print("Ítem agregado al carrito.")
         elif opcion == "3":
-            pedido.mostrar_carrito()
+            compra.mostrar_carrito()
         elif opcion == "4":
-            total = pedido.calcular_total(menu)
+            total = compra.calcular_total(menu)
             print(f"Total a pagar: ${total:.2f}")
         elif opcion == "5":
-            cliente, hora, cadete = pedido.cierre_compra()
+            cliente, hora, cadete = compra.cierre_compra()
             if cadete.lower() == "si":
-                direccion = input("Ingrese la dirección de entrega: ")
-                print(f"COMPRA CONFIRMADA\nN° Pedido: {num_pedido}\nCliente: {cliente}\nHora: {hora}\n¿Cadete?: Si\nDirección: {direccion}\nTotal: ${total:.2f}")
+                print("COMPRA CONFIRMADA\n")
+                print(f"N° compra: {num_compra}")
+                print(f"Cliente: {cliente}")
+                print(f"Hora: {hora}")
+                print("¿Cadete?: No)")
+                print(f"Total: ${total:.2f}")
             else:
-                print(f"COMPRA CONFIRMADA\nN° Pedido: {num_pedido}\nCliente: {cliente}\nHora: {hora}\n¿Cadete?: No\nTotal: ${total:.2f}")
-            num_pedido += 1
+                print("COMPRA CONFIRMADA\n")
+                print(f"N° compra: {num_compra}")
+                print(f"Cliente: {cliente}")
+                print(f"Hora: {hora}")
+                print("¿Cadete?: No)")
+                print(f"Total: ${total:.2f}")
+            num_compra += 1
+            # ACA HAY QUE VER COMO REINICIAR TODAS LAS VARIABLES PARA UNA PROXIMA COMPRA
             break
         elif opcion == "6":
             print("Saliendo del programa.")

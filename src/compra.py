@@ -1,20 +1,8 @@
 # -*- coding: utf-8 -*-
 
-class Menu:
-    def __init__(self):
-        self.items = {
-            "hamburguesa": 5.99, 
-            "pizza": 7.99, 
-            "papas fritas": 2.49, 
-            "birrita": 1.50
-            }
 
-    def mostrar_menu(self):
-        print("\nMenú:")
-        for item, precio in self.items.items():
-            print(f"{item}: ${precio}")
 
-class Pedido:
+class Compra:
     def __init__(self):
         self.carrito = []
 
@@ -36,10 +24,5 @@ class Pedido:
         cliente = input('Nombre del cliente: ')
         hora = input('¿A qué hora le gustaría retirar la comida? ')
         cadete = input('¿Desea cadete? ')
-        if cadete.lower() == "si":
-            direccion = input('¿Dirección? ')
-            cadete = f"Si, {direccion}"  # f-string para incluir la dirección
-            return cliente, hora, cadete
-        else:
-            return cliente, hora, "No"
+        return cliente, hora, cadete
 
