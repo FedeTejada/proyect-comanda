@@ -13,7 +13,7 @@ def main():
         print("3. Mostrar carrito")
         print("4. Calcular total")
         print("5. Confirmar compra")
-        print("6. Salir")
+        print("6. Salir\n")
 
         opcion = input("Seleccione una opción: ")
 
@@ -21,7 +21,7 @@ def main():
             menu.mostrar_menu()
         elif opcion == "2":
             menu.mostrar_menu()
-            item = input("Ingrese el ítem que desea agregar: ").lower()
+            item = input("\nIngrese el ítem que desea agregar: ").lower()
             cantidad = int(input("Ingrese la cantidad: "))
             pedido.agregar_item(item, cantidad)
             print("Ítem agregado al carrito.")
