@@ -1,7 +1,4 @@
-import sys
-sys.path.append('src\clases')
-
-from producto import Producto # Reemplaza 'archivo' con el nombre de tu archivo y 'Clase' con el nombre de tu clase o función
+from ..clases.producto import Producto
 
 lomito = Producto('Lomito', 50)
 
