@@ -1,20 +1,27 @@
 # Importan modulos
+from clases.producto import Producto
+from funciones import *
+
+# Variables
+
 
 # Funcion Menu
-def menu():
+def main():
+
     # Un while true para que se repita hasta que se diga lo contrario
     while True:
         # Pantalla principal con menu de opciones
-        print("\n¿Que desea realizar?")
-        print("\n1. Tomar pedidos")
-        print("2. Cambiar precios")
-        print("3. Reportar balances")
-        print("4. Salir")
-
+        print("\n¿Que desea hacer?")
+        print("1 - Tomar pedido")
+        print("2 - Agregar o modificar producto")
+        print("3 - Reporte de ventas")
+        print("4 - Salir")
+        
         # El usuario elige la operacion que quiere realizar
-        opcion = input("Seleccione una opción: ")
+        opcion = input("Seleccione una opción:")
 
         if opcion == "1":
+            tomar_pedido(menu)
             return
         
         elif opcion == "2":
