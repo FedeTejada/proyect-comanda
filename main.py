@@ -1,6 +1,6 @@
 # Importan modulos
 from clases.producto import Producto
-from funciones import *
+from utilidades.funciones_generales import *
 
 # Variables
 
