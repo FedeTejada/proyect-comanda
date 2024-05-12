@@ -1,0 +1,18 @@
+<HomeScreen>:
+    orientation: "vertical"
+
+    Button:
+        text: "Tomar pedidos"
+        on_press: root.manager.current = "order_screen"
+
+    Button:
+        text: "Balance de ventas"
+        on_press: root.manager.current = "sales_balance_screen"
+
+    Button:
+        text: "Gestión de productos"
+        on_press: root.manager.current = "product_management_screen"
+
+    Button:
+        text: "Cierre de caja"
+        on_press: root.manager.current = "closing_screen"

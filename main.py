@@ -1,22 +1,14 @@
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager
-from clases.home_screen import HomeScreen
 from pedidos.pedidos import PedidoApp
+from kivy.core.window import Window
 
-class HomeApp(App):
-    def build(self):
-        # Crea una instancia de ScreenManager
-        sm = ScreenManager()
+if __name__ == "__main__":
+    # Establecer el tamaño mínimo de la ventana
+    Window.minimum_width = 400
+    Window.minimum_height = 700
+    
+    # Configurar la ventana para que no sea redimensionable
+    Window.size = (400, 700)
+    Window.resizable = False
 
-        # Crea una instancia de PedidoApp
-        pedido_app = PedidoApp()
-
-        # Agrega una instancia de HomeScreen al ScreenManager
-        home_screen = HomeScreen(name='home')
-        home_screen.ids.home_button.bind(on_release=home_screen.open_pedido_app)
-        sm.add_widget(home_screen)
-
-        return sm
-
-if __name__ == '__main__':
-    HomeApp().run()
+    PedidoApp().run()

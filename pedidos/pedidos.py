@@ -4,11 +4,22 @@ from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
+from kivy.properties import NumericProperty, ListProperty
+from kivy.uix.label import Label
 from clases.producto import Producto
+
+
+class TotalButton(Button):
+    pass
+
+class CarritoButton(Button):
+    pass
+
+class RoundedButton(Button):
+    pass
 
 class PedidoApp(App):
     def build(self):
-        from clases.home_screen import HomeScreen
         # Inicializa variables
         self.menu = [
             Producto("Lomito", 100),
@@ -19,8 +30,6 @@ class PedidoApp(App):
         ]
         self.carrito = []
         self.total = 0
-        self.home_screen = HomeScreen(pedido_app=self)
-        return self.home_screen
 
         # Crea el layout principal con un BoxLayout vertical
         self.layout_principal = BoxLayout(orientation='vertical')
@@ -39,8 +48,8 @@ class PedidoApp(App):
         # Agrega el layout del carrito dentro del ScrollView
         self.layout_principal.add_widget(self.layout_carrito)
 
-        # Agrega el botón de total
-        self.total_button = Button(text=f"Total: ${self.total}", size_hint=(1, None), height=70,
+        # Agrega el botón de total con estilo personalizado
+        self.total_button = TotalButton(text=f"Total: ${self.total}", size_hint=(1, None), height=70,
                                    background_color=(0, 0.5, 1, 1), font_size=20, font_name='Arial', bold=True)
         self.total_button.bind(on_press=self.show_total_popup)
         self.layout_principal.add_widget(self.total_button)
@@ -48,15 +57,18 @@ class PedidoApp(App):
         return self.layout_principal
 
     def create_product_column(self):
-        layout_productos = BoxLayout(orientation='vertical')
+        layout_productos = BoxLayout(orientation='vertical', spacing=10)
 
         for producto in self.menu:
-            btn = Button(text=producto._nombre, size_hint=(1, None), height=70)
+            btn = CarritoButton(text=producto._nombre, size_hint=(None, None), size=(300, 70))  # Tamaño fijo para todos los botones
             btn.producto = producto
             btn.bind(on_press=self.open_quantity_popup)
+            btn.size_hint_x = None  # Permite que el botón tenga su propio ancho
+            btn.pos_hint = {'center_x': 0.5}  # 
             layout_productos.add_widget(btn)
 
         return layout_productos
+
 
     def open_quantity_popup(self, instance):
         # Crea un nuevo BoxLayout para contener el TextInput y el botón de confirmación
@@ -78,10 +90,17 @@ class PedidoApp(App):
         popup.open()
 
     def on_confirm_button_press(self, cantidad, producto, popup):
-        cantidad = int(cantidad)
-        self.on_enter(cantidad, producto)
-        # Cierra la ventana emergente después de procesar la cantidad ingresada
-        popup.dismiss()
+        try:
+            cantidad = int(cantidad)
+            self.on_enter(cantidad, producto)
+        except ValueError:
+            # Manejar la excepción cuando la entrada no es un número válido
+            error_label = Label(text="La cantidad debe ser un número entero.")
+            error_popup = Popup(title='Error', content=error_label, size_hint=(None, None), size=(400, 150))
+            error_popup.open()
+        finally:
+            # Cierra la ventana emergente después de procesar la cantidad ingresada
+            popup.dismiss()
 
     def on_enter(self, cantidad, producto):
         # Maneja la entrada de cantidad
@@ -103,8 +122,8 @@ class PedidoApp(App):
 
         # Muestra el carrito
         for item in self.carrito:
-            btn = Button(text=f"- {item['nombre']}s x {item['cantidad']}u. a ${item['total']}", size_hint=(1, None), height=40,
-                          background_color=(0.5, 0, 0, 1))  # Cambia el color de fondo
+            btn = CarritoButton(text=f"- {item['nombre']}s x {item['cantidad']}u. a ${item['total']}", size_hint=(1, None), height=40,
+                            background_color=(0.5, 0, 0, 1))  # Cambia el color de fondo
             btn.item = item
             btn.bind(on_press=self.remove_from_cart)
             self.layout_carrito_content.add_widget(btn)
@@ -122,5 +141,5 @@ class PedidoApp(App):
                             size=(200, 100))
         total_popup.open()
 
-if __name__ == "__main__":
+if __name__ == "__main__" or __name__ == 'home_screen':
     PedidoApp().run()
