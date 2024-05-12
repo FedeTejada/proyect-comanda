@@ -1,20 +1,16 @@
 from clases.producto import Producto
 
 # Variables temporales
-lomito = Producto("Lomito", 100)
-pizza = Producto("Pizza", 200)
-hamburguesa = Producto("Hamburguesa", 300)
-empanada = Producto("Empanada", 400)
-cerveza = Producto("Cerveza", 50)
+lomito = Producto("Lomito", 100,"Sanguche")
+pizza = Producto("Pizza", 200,"Pizza")
+hamburguesa = Producto("Hamburguesa", 300,"Sanguche")
+coca = Producto("Coca-Cola", 200,"Bebida")
+cerveza = Producto("Cerveza", 50, "Bebida")
 
-menu = [lomito, pizza, hamburguesa, empanada, cerveza]
+menu = [lomito, pizza, hamburguesa, coca, cerveza]
 
 # Si el usuario quiere cargar un producto (REVISAR)
-def producto_nuevo(menu):
-    nombre_producto = input('Ingrese el producto a agregar: ')
-    precio = int(input('¿Que precio tiene ese producto? '))
-    producto = Producto(nombre_producto, precio)
-    menu.append(producto)
+
 
 # Toma de pedidos
 def tomar_pedido(menu):
@@ -30,7 +26,7 @@ def tomar_pedido(menu):
         contador += 1
     
     # Eleccion del producto
-    eleccion = int(input('\n'))
+    eleccion = int(input(''))
     
     # Siempre que el producto este dentro de la longitud del array menu el while se recorrera
     while (eleccion - 1) <= len(menu):
@@ -47,12 +43,12 @@ def tomar_pedido(menu):
         
         contador = 1
         print('Algun otro producto?')
-        
+    
         for producto in menu:
             print(f'{contador} - {producto._nombre}')
             contador += 1
+        eleccion = int(input(''))
         
-        eleccion = int(input('\n'))
     
     print(total)
     carrito = []
