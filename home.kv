@@ -1,0 +1,29 @@
+
+ScreenManager:
+    HomeScreen:
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 20
+
+        Label:
+            text: '¿Qué desea hacer?'
+            font_size: '20sp'
+
+        Button:
+            text: 'Tomar pedido'
+            on_press: root.tomar_pedido()
+
+        Button:
+            text: 'Agregar o modificar producto'
+            on_press: root.agregar_modificar_producto()
+
+        Button:
+            text: 'Reporte de ventas'
+            on_press: root.reporte_ventas()
+
+        Button:
+            text: 'Salir'
+            on_press: root.salir()

@@ -1,43 +1,22 @@
-# Importan modulos
-from clases.producto import Producto
-from utilidades.funciones_generales import *
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager
+from clases.home_screen import HomeScreen
+from pedidos.pedidos import PedidoApp
 
-# Variables
+class HomeApp(App):
+    def build(self):
+        # Crea una instancia de ScreenManager
+        sm = ScreenManager()
 
+        # Crea una instancia de PedidoApp
+        pedido_app = PedidoApp()
 
-# Funcion Menu
-def main():
+        # Agrega una instancia de HomeScreen al ScreenManager
+        home_screen = HomeScreen(name='home')
+        home_screen.ids.home_button.bind(on_release=home_screen.open_pedido_app)
+        sm.add_widget(home_screen)
 
-    # Un while true para que se repita hasta que se diga lo contrario
-    while True:
-        # Pantalla principal con menu de opciones
-        print("\n¿Que desea hacer?")
-        print("1 - Tomar pedido")
-        print("2 - Agregar o modificar producto")
-        print("3 - Reporte de ventas")
-        print("4 - Salir")
-        
-        # El usuario elige la operacion que quiere realizar
-        opcion = input("Seleccione una opción:")
+        return sm
 
-        if opcion == "1":
-            tomar_pedido(menu)
-            return
-        
-        elif opcion == "2":
-            return
-        
-        elif opcion == "3":
-            return
-        
-        elif opcion == "4":
-            print("Saliendo del programa.")
-            break
-
-        # En caso de elegir una operacion incorrecta salta una advertencia y se reinicia el while
-        else:
-            print("Opción no válida. Por favor, seleccione una opción válida.")
-
-# Si el archivo es el main se lo llama
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    HomeApp().run()
