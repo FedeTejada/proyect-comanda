@@ -30,7 +30,7 @@ def main():
     #     # En caso de elegir una operacion incorrecta salta una advertencia y se reinicia el while
     #     else:
     #         print("Opción no válida. Por favor, seleccione una opción válida.")
-    
+
 # Si el archivo es el main se lo llama
-if __name__ == "__main__":
-    main()
+    if __name__ == "__main__":
+        main()
