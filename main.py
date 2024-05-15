@@ -1,5 +1,6 @@
 # Importan modulos
 from src.models.Product import Product
+from src.models.Order import Order
 # Corre programa
 def main():
     # Un while true para que se repita hasta que se diga lo contrario
@@ -32,5 +33,11 @@ def main():
     #         print("Opción no válida. Por favor, seleccione una opción válida.")
 
 # Si el archivo es el main se lo llama
-    if __name__ == "__main__":
+
+
+    lomito = Product(1,"lomito",500,"sandwich")
+    print(lomito.getName())
+    print(lomito.getPrice())
+#Correr programa
+if __name__ == "__main__":
         main()

@@ -1,10 +1,9 @@
 # Create of the class Products
 class Product:
-    def __init__(self,id,name,price,category):
+    def __init__(self,id,name,price):
         self._id = id
         self._name = name
         self._price = price
-        self._category = category
 
     def getName(self):
         return self._name
@@ -21,6 +20,4 @@ class Product:
     def setPrice(self,price):
         self._price = price
 
-    def setCategory(self,category):
-        self._category = category
 
