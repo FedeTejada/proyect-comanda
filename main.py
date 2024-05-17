@@ -3,11 +3,11 @@ import tkinter as tk
 import customtkinter
 from customtkinter import *
 from PIL import Image, ImageTk
-from src.interface.frame_home import frame_home
-from src.interface.frame_orders import frame_orders
-from src.interface.frame_modif_product import frame_modif_product
-from src.interface.frame_balance import frame_balance
-from src.interface.frame_config import frame_config
+from src.service.home import frame_home
+from src.service.orders import frame_orders
+from src.service.change_products import frame_modif_product
+from src.service.balance import frame_balance
+from src.service.config import frame_config
 
 # Function for change the main content
 def change_section(frame, seccion_funcion):
@@ -21,15 +21,18 @@ root.title("Comandero")
 customtkinter.set_appearance_mode("system")  # default
 
 # Window dimensions
-width = 900
+width = 1200
 height = 600
 
-# Calculing the x and y position for center the window
+# Calculating the x and y position for centering the window
 pos_x = int(root.winfo_screenwidth()/2 - width/2)
 pos_y = int(root.winfo_screenheight()/2 - height/2)
 
 # Stablish the size and position
 root.geometry(f"{width}x{height}+{pos_x}+{pos_y}")
+
+# Set minimum window size
+root.minsize(1200, 600)  # Example minimum width: 600px, minimum height: 400px
 
 # Nav bar configuration
 frame_nav = CTkFrame(root, 
