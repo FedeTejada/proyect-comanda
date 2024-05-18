@@ -135,6 +135,8 @@ def finalize_purchase():
     print(f"Total: ${total_price}")
 
     messagebox.showinfo("Order Confirmed", "Your order has been confirmed.")
+    selected_products = {}
+    update_cart_display()
 
 def show_products(products_frame, menu):
     """
