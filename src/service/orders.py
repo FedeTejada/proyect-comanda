@@ -47,7 +47,6 @@ def add_to_cart(product):
 
     update_cart_display()
 
-
 def update_cart_display():
     """
     Update the cart display with selected products and calculate the total price.
@@ -62,8 +61,6 @@ def update_cart_display():
         if product:
             total_price += product._price * quantity
     total_label.config(text=f"Total: ${total_price}")
-
-
 
 def remove_from_cart():
     """
@@ -91,10 +88,53 @@ def finalize_purchase():
     """
     Finalize the purchase and show a confirmation dialog.
     """
-    confirm = messagebox.askquestion("Confirm", "Do you want to finalize the purchase?")
-    if confirm == "yes":
-        # Logic to finalize the purchase
-        pass
+    if not selected_products:
+        messagebox.showerror("Error", "No products in the cart.")
+        return
+
+    # Collect customer details
+    name_dialog = CTkInputDialog(title="Customer Name", text="Enter your name:")
+    customer_name = name_dialog.get_input()
+
+    if customer_name is None:
+        return
+
+    time_dialog = CTkInputDialog(title="Pickup Time", text="Enter the time you want the food:")
+    pickup_time = time_dialog.get_input()
+
+    if pickup_time is None:
+        return
+
+    cadet_dialog = CTkInputDialog(title="Delivery Option", text="Do you want a cadet? (yes/no):")
+    cadet_option = cadet_dialog.get_input()
+
+    if cadet_option is None:
+        return
+
+    cadet_address = None
+    if cadet_option.lower() == "yes":
+        address_dialog = CTkInputDialog(title="Address", text="Enter your address:")
+        cadet_address = address_dialog.get_input()
+
+        if cadet_address is None:
+            return
+
+    observation_dialog = CTkInputDialog(title="Observations", text="Any observations? (optional):")
+    observation = observation_dialog.get_input()
+
+    # Print the order details
+    print(f"Customer: {customer_name}")
+    print(f"Pickup Time: {pickup_time}")
+    print(f"Cadet: {cadet_option}")
+    if cadet_address:
+        print(f"Address: {cadet_address}")
+    print(f"Observations: {observation}")
+    
+    # Get the total price from the label
+    total_price = total_label.cget("text").split(": $")[1]
+    print(f"Total: ${total_price}")
+
+    messagebox.showinfo("Order Confirmed", "Your order has been confirmed.")
 
 def show_products(products_frame, menu):
     """
