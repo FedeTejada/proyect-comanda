@@ -52,6 +52,7 @@ def update_cart_display():
     Update the cart display with selected products and calculate the total price.
     """
     global selected_products
+    
     cart_listbox.delete(0, tk.END)
     total_price = 0
     for product_name, quantity in selected_products.items():
@@ -88,6 +89,8 @@ def finalize_purchase():
     """
     Finalize the purchase and show a confirmation dialog.
     """
+    global selected_products
+    
     if not selected_products:
         messagebox.showerror("Error", "No products in the cart.")
         return
@@ -135,6 +138,8 @@ def finalize_purchase():
     print(f"Total: ${total_price}")
 
     messagebox.showinfo("Order Confirmed", "Your order has been confirmed.")
+    
+    # BORRAR ESTO CUANDO SE HAGA, TIENEN QUE MANDAR EL selected_products A ALGUN LADO ANTES DE QUE YO LO RESETEE EN LA LINEA DE ACA ABAJO
     selected_products = {}
     update_cart_display()
 
