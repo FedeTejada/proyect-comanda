@@ -1,43 +1,24 @@
-# Importan modulos
-from src.models.Product import Product
-from src.models.Order import Order
-# Corre programa
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
+from models import Base, Product, Order, OrderProduct
+from config import engine
+from service.serviceProduct import addProducts
+from service.serviceProduct import *
+
+
+
+def createTables():
+    Base.metadata.create_all(engine)
+    
 def main():
-    # Un while true para que se repita hasta que se diga lo contrario
-    # while True:
-    #     # Pantalla principal con menu de opciones
-    #     print("\n¿Que desea realizar?")
-    #     print("\n1. Tomar pedidos")
-    #     print("2. Cambiar precios")
-    #     print("3. Reportar balances")
-    #     print("4. Salir")
-
-    #     # El usuario elige la operacion que quiere realizar
-    #     opcion = input("Seleccione una opción: ")
-
-    #     if opcion == "1":
-    #         return
-        
-    #     elif opcion == "2":
-    #         return
-        
-    #     elif opcion == "3":
-    #         return
-        
-    #     elif opcion == "4":
-    #         print("Saliendo del programa.")
-    #         break
-
-    #     # En caso de elegir una operacion incorrecta salta una advertencia y se reinicia el while
-    #     else:
-    #         print("Opción no válida. Por favor, seleccione una opción válida.")
-
-# Si el archivo es el main se lo llama
-
-
-    lomito = Product(1,"lomito",500,"sandwich")
-    print(lomito.getName())
-    print(lomito.getPrice())
-#Correr programa
+    #name = input("Add new name product:\n")
+    #price = int(input("insert new price of the product:\n"))
+    #addProducts(name,price)
+    updateProduct(2,"pizza",800)
+    
+    
 if __name__ == "__main__":
-        main()
+    main()
