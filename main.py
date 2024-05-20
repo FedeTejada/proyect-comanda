@@ -7,18 +7,25 @@ from models import Base, Product, Order, OrderProduct
 from config import engine
 from service.serviceProduct import addProducts
 from service.serviceProduct import *
+from service.serviceOrder import *
 
 
 
 def createTables():
     Base.metadata.create_all(engine)
-    
+
+
 def main():
-    #name = input("Add new name product:\n")
-    #price = int(input("insert new price of the product:\n"))
-    #addProducts(name,price)
-    updateProduct(2,"pizza",800)
+    name = "Lomito"
+    price = float(500.50)
+    addProducts(name,price)
+    name = "pizza"
+    price = float(200.50)
+    addProducts(name,price)
     
+    createOrder(False,"chupachichi")
+    addProductToOrder(1,4,1)
+    addProductToOrder(1,4,2)
     
 if __name__ == "__main__":
     main()
