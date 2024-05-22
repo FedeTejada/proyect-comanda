@@ -6,10 +6,11 @@ db = session
 
 
 def addProducts(name,price):
-    newProduct= Product(name=name , price=price)
-    db.add(newProduct)
-    db.commit()
-    db.refresh(newProduct)
+        newProduct= Product(name=name , price=price)
+        db.add(newProduct)
+        db.commit()
+        db.refresh(newProduct)
+
 
 
 def getProducts():
