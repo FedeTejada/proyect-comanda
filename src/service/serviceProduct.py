@@ -1,5 +1,5 @@
 from models.Product import Product
-from config.config import engine,session
+from config.config import session
 
 db = session
 # Service of the product, add update delete products
