@@ -3,10 +3,18 @@ import os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
+<<<<<<< Updated upstream
 from src.models import Base, Product, Order, OrderProduct
 from src.config import engine
 from src.service.serviceProduct import addProducts
 from src.service.serviceProduct import *
+=======
+from models import Base, Product, Order, OrderProduct
+from config import engine
+from service.serviceProduct import addProducts
+from service.serviceProduct import *
+from service.serviceOrder import *
+>>>>>>> Stashed changes
 
 
 
