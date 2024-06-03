@@ -8,14 +8,6 @@ from src.models.Product import Product
 # ARRAY FOR TESTING
 # Initialize some sample products and add them to a test menu array
 
-lomito = Product(33, "Lomito", 100, "Sanguche")
-pizza = Product(11, "Pizza", 500, "Pizza")
-vianda_1 = Product(21, "Vianda 1", 400, "Vianda")
-vianda_2 = Product(22, "Vianda 2", 400, "Vianda")
-hamburguesa = Product(44, "Hamburguesa", 300, "Sanguche")
-empanada = Product(55, "Empanada", 200, "Empanada")
-
-menu = [lomito, pizza, vianda_1, vianda_2, hamburguesa, empanada]
 
 # ------------------------------------------------------------------------------
 # Variables
