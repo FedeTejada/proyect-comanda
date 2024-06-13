@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class OrderController:
     def __init__(self): # instancio la clase, con los atributos necesarios para llevar a cabo una orden
-        self.menu = getAllProducts()
+        self.menu = getProducts()
         self.order = create_order(False, "Desconocida", "Desconocida") # creo una orden "vacia" para poder crear los objetos ordenXproduc
         self.selected_products = {} # diccionario con productos y cantidad
         self.list_product = [] # lista de producto_orden
