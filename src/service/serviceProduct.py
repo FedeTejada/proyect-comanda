@@ -1,9 +1,10 @@
 from models.Product import Product
 from config.config import engine,session
+import logging
+logger = logging.getLogger(__name__)
 
 db = session
 # Service of the product, add update delete products
-
 
 def addProducts(name,price):
     newProduct= Product(name=name , price=price)
@@ -11,8 +12,7 @@ def addProducts(name,price):
     db.commit()
     db.refresh(newProduct)
 
-
-def getProducts():
+def getAllProducts():
     return db.query(Product).all()
 
 
@@ -43,3 +43,7 @@ def deleteProduct(product_id):
             db.commit()
     else:
         print("No se encontro el producto a eliminar.")
+        
+def get_product_id_by_name(product_name):
+    product = db.query(Product).filter_by(name=product_name).first()
+    return product.id if product else None

@@ -7,7 +7,7 @@ class OrderProduct(Base):
     __tablename__ = 'order_product'
     product_id = Column(Integer, ForeignKey('product.id'), primary_key=True)
     order_id = Column(Integer, ForeignKey('orders.id'), primary_key=True)
-    cantidad = Column(Integer, nullable=False)
+    quantity = Column(Integer, nullable=False)
     
     product = relationship('Product')
     order = relationship('Order')
