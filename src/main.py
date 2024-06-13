@@ -5,9 +5,10 @@ from customtkinter import *
 from PIL import Image, ImageTk
 from service.home import frame_home
 from view.order import frame_orders
-from service.change_products import frame_modif_product
 from service.balance import frame_balance
 from service.config import frame_config
+from view.change_products import frame_modif_product
+
 
 # ------------------------------------------------------------------------------
 # FUNCTION TO CHANGE THE MAIN CONTENT

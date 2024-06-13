@@ -1,49 +1,66 @@
-from models.Product import Product
-from config.config import engine,session
+from src.models.Product import Product
+from src.config.config import engine, session
+from sqlalchemy.orm.exc import NoResultFound
 import logging
-logger = logging.getLogger(__name__)
 
 db = session
-# Service of the product, add update delete products
 
-def addProducts(name,price):
-    newProduct= Product(name=name , price=price)
-    db.add(newProduct)
-    db.commit()
-    db.refresh(newProduct)
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-def getAllProducts():
-    return db.query(Product).all()
+# Service of the product: add, update, delete products
 
+def addProducts(name, price):
+    try:
+        newProduct = Product(name=name, price=price)
+        db.add(newProduct)
+        db.commit()
+        db.refresh(newProduct)
+        logger.info(f"Product added: {newProduct}")
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Error adding product: {e}")
+        raise
+
+def getProducts():
+    try:
+        products = db.query(Product).all()
+        return products
+    except Exception as e:
+        logger.error(f"Error retrieving products: {e}")
+        raise
 
 def updateProduct(product_id, name=None, price=None):
-    product = db.query(Product).filter(Product.id == product_id).first()
-    # Verify what product is not null 
-    if product != None:
-        if product:
-            if name:
-                product.name = name
-            if price:
-                product.price = price
+    try:
+        product = db.query(Product).filter(Product.id == product_id).one()
+        if name:
+            product.name = name
+        if price:
+            product.price = price
         db.commit()
         db.refresh(product)
-    else: #if the product is NULL, shows mensagge the error
-        print("El producto con el ID seleccionado no se encunetra en la base de datos")
-    #print(type(product)) 
+        logger.info(f"Product updated: {product}")
+    except NoResultFound:
+        logger.error(f"Product with ID {product_id} not found")
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Error updating product: {e}")
+        raise
 
-# 
 def deleteProduct(product_id):
-    #find product for id whith product_id
-    product = db.query(Product).filter(Product.id == product_id).first() #if we found the product 
-    print(type(product))
-    #if the product exist is delete.
-    if product != None:
-        if product:
-            db.delete(product)
-            db.commit()
-    else:
-        print("No se encontro el producto a eliminar.")
-        
+    try:
+        product = db.query(Product).filter(Product.id == product_id).one()
+        db.delete(product)
+        db.commit()
+        logger.info(f"Product deleted: {product}")
+    except NoResultFound:
+        logger.error(f"Product with ID {product_id} not found")
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Error deleting product: {e}")
+        raise
+
 def get_product_id_by_name(product_name):
     product = db.query(Product).filter_by(name=product_name).first()
     return product.id if product else None
