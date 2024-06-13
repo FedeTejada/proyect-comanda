@@ -25,6 +25,7 @@ def change_section(frame, seccion_funcion):
 
 root = customtkinter.CTk()
 root.title("Comandero")
+root.after(201, lambda: root.iconbitmap('.\media\images\logo.ico'))
 customtkinter.set_appearance_mode("system")  # Set the appearance mode to system default
 
 # Window dimensions
