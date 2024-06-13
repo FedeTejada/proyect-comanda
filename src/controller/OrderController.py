@@ -64,4 +64,5 @@ class OrderController:
         return total_price
 
     def get_menu(self):
+        self.menu = getProducts()
         return self.menu

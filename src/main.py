@@ -4,7 +4,7 @@ import customtkinter
 from customtkinter import *
 from PIL import Image, ImageTk
 from service.home import frame_home
-from view.order import frame_orders
+from view.order import frame_orders, show_products
 from service.balance import frame_balance
 from service.config import frame_config
 from view.change_products import frame_modif_product
