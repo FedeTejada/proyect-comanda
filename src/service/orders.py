@@ -1,4 +1,5 @@
 # orders.py
+from win32printing import Printer
 import tkinter as tk
 from tkinter import messagebox
 from customtkinter import CTkFrame, CTkButton, CTkInputDialog, CTkScrollableFrame
@@ -23,6 +24,17 @@ menu = [lomito, pizza, vianda_1, vianda_2, hamburguesa, empanada]
 
 product_buttons = {}  # Dictionary to store product buttons
 selected_products = {}  # Dictionary to store selected products and their quantities
+
+# ------------------------------------------------------------------------------
+# Styles
+title = {
+    "height": 16,
+    "weight": 800,
+}
+
+normal = {
+    "height": 12,
+}
 
 # ------------------------------------------------------------------------------
 # Functions
@@ -125,17 +137,31 @@ def finalize_purchase():
     observation_dialog = CTkInputDialog(title="Observations", text="Any observations? (optional):")
     observation = observation_dialog.get_input()
 
-    # Print the order details
-    print(f"Customer: {customer_name}")
-    print(f"Pickup Time: {pickup_time}")
-    print(f"Cadet: {cadet_option}")
-    if cadet_address:
-        print(f"Address: {cadet_address}")
-    print(f"Observations: {observation}")
-    
     # Get the total price from the label
     total_price = total_label.cget("text").split(": $")[1]
-    print(f"Total: ${total_price}")
+    
+    # Print the order details
+    with Printer(linegap=5) as printer:
+        printer.text(f"--- {customer_name} ---", font_config=title)
+        printer.text(" ")
+        printer.text(" ")
+        for product_name, quantity in selected_products.items():
+            # Find the product in the menu to get its price
+            product = next((p for p in menu if p._name == product_name), None)
+            printer.text(f"                    {product_name} x {quantity} - ${product._price}", font_config=normal)
+        printer.text(" ")
+        printer.text(" ")
+        printer.text(f"HORA: {pickup_time}", font_config=normal)
+        printer.text(" ")
+        printer.text(f"CADETE: {cadet_option}", font_config=normal)
+        if cadet_address:
+            printer.text(f"DIRECCIÓN: {cadet_address}")
+        printer.text(" ")
+        printer.text(f"OBS: {observation}", font_config=normal)
+        printer.text(" ")
+        printer.text(" ")
+        printer.text(f"                    ${total_price}", font_config=title)
+    
 
     messagebox.showinfo("Order Confirmed", "Your order has been confirmed.")
     
