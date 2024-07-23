@@ -1,14 +1,16 @@
 # orders.py
 import tkinter as tk
+import time
 from tkinter import messagebox
 from customtkinter import CTkFrame, CTkButton, CTkInputDialog, CTkScrollableFrame
 from controller.OrderController import OrderController
-
+from service.serviceProduct import getProducts
+from win32printing import Printer
 product_buttons = {}
 order_controller = OrderController()
 
 def add_to_cart(product):
-    quantity_dialog = CTkInputDialog(title="Quantity", text=f"Enter quantity for {product.name}:")
+    quantity_dialog = CTkInputDialog(title="Cantidad", text=f"Ingrese la cantidad de {product.name}:")
     quantity = quantity_dialog.get_input()
     if quantity is not None:
         try:
@@ -16,7 +18,7 @@ def add_to_cart(product):
             order_controller.add_to_cart(product, quantity)
             update_cart_display()
         except ValueError:
-            messagebox.showerror("Error", "Please enter a valid integer for quantity.")
+            messagebox.showerror("Error", "Ingrese una cantiad valida")
 
 def update_cart_display():
     cart_listbox.delete(0, tk.END)
@@ -26,7 +28,7 @@ def update_cart_display():
     total_label.config(text=f"Total: ${total_price}")
 
 def remove_from_cart():
-    if messagebox.askokcancel("Remove All", "Do you want to remove all items from the cart?"):
+    if messagebox.askokcancel("Eliminar todo", "Desea eliminar todos los items del carrito?"):
         order_controller.remove_from_cart()
         update_cart_display()
 
@@ -35,53 +37,84 @@ def remove_item(event):
     if index:
         item = cart_listbox.get(index)
         product_name, _ = item.split(" x ")
-        if messagebox.askokcancel("Remove Item", f"Do you want to remove {product_name} from the cart?"):
+        if messagebox.askokcancel("Eliminar item", f"Quieres eliminar {product_name} del carrito?"):
             order_controller.remove_item(product_name)
             update_cart_display()
 
 def finalize_purchase():
-    if not order_controller.selected_products:
-        messagebox.showerror("Error", "No products in the cart.")
-        return
+    """
+    Finalize the purchase and show a confirmation dialog.
+    """
+    # Define font configurations
+    title_font = {
+        "height": 16,
+        "weight": 800,
+    }
+
+    normal_font = {
+        "height": 12,
+    }
 
     # Collect customer details
-    name_dialog = CTkInputDialog(title="Customer Name", text="Enter the name of the customer:")
+    name_dialog = CTkInputDialog(title="Nombre del cliente", text="Ingrese el nombre:")
     customer_name = name_dialog.get_input()
-
     if customer_name is None:
         return
 
-    time_dialog = CTkInputDialog(title="Pickup Time", text="Enter the time you want the food:")
+    time_dialog = CTkInputDialog(title="Hora", text="Para que hora seria:")
     pickup_time = time_dialog.get_input()
-
     if pickup_time is None:
         return
 
-    cadet_dialog = CTkInputDialog(title="Delivery Option", text="Do you want a cadet? (yes/no):")
+    cadet_dialog = CTkInputDialog(title="Delivery", text="Quiere cadete? (Si/No):")
     cadet_option = cadet_dialog.get_input()
-
     if cadet_option is None:
         return
 
     cadet_address = None
-    if cadet_option.lower() == "yes":
-        address_dialog = CTkInputDialog(title="Address", text="Enter your address:")
+    if cadet_option.lower() == "si" or cadet_option.lower() == "s":
+        cadet_option = 1
+        address_dialog = CTkInputDialog(title="Direccion", text="Ingrese la direcion a enviar:")
         cadet_address = address_dialog.get_input()
-
         if cadet_address is None:
             return
-    
-    cadet_dialog = CTkInputDialog(title="Obserevation", text="do u want to do an observation? (optional):")
-    observation = cadet_dialog.get_input()
-    
-    if cadet_option == "yes":
-        cadete = True
     else:
-        cadete = False
+        cadet_option = 0
+    observation_dialog = CTkInputDialog(title="Observaciones", text="Alguna observacion? (opcional):")
+    observation = observation_dialog.get_input()
 
-    # Call finalize_purchase on the controller
-    order_controller.finalize_purchase(customer_name, pickup_time, cadete, cadet_address, observation)
-    messagebox.showinfo("Order Confirmed", "Your order has been confirmed.")
+    # Get the total price from the label
+    total_price = total_label.cget("text").split(": $")[1]
+
+    # Retrieve the selected products
+    selected_products = getProducts()
+
+    # Print the order details
+    with Printer(linegap=5) as printer:
+        printer.text(f"--- {customer_name} ---", font_config=title_font)
+        printer.text(" ")
+
+        for product_name in selected_products:
+            # Find the product in the menu to get its price
+            if product_name in selected_products:
+                printer.text(f"{product_name.name} - ${product_name.price}", font_config=normal_font)
+                break
+        printer.text(" ")
+        printer.text(f"HORA: {pickup_time}", font_config=normal_font)
+        printer.text(" ")
+        printer.text(f"CADETE: {cadet_option}", font_config=normal_font)
+        if cadet_address:
+            printer.text(f"DIRECCIÓN: {cadet_address}", font_config=normal_font)
+            printer.text(" ")
+        if observation:
+            printer.text(f"OBS: {observation}", font_config=normal_font)
+            printer.text(" ")
+            printer.text(f"${total_price}", font_config=title_font)
+
+    # Show confirmation message
+    messagebox.showinfo("Orden confirmada", "La compra fue confirmada")
+    order_controller.finalize_purchase(customer_name, pickup_time, cadet_option, cadet_address, observation)
+    # Update cart display (assumed to clear the current cart)
     update_cart_display()
 
 def show_products(products_frame):
@@ -100,7 +133,7 @@ def show_products(products_frame):
         col_num = i % num_columns
         product_button = CTkButton(products_frame,
                                    text=product.name,
-                                   command=lambda p=product: add_to_cart(p),
+                                   command=lambda p=product:add_to_cart(p),
                                    width=80,
                                    height=height_button,
                                    font=("Helvetica", 16),
@@ -150,7 +183,7 @@ def frame_orders(frame):
     total_label.pack(side="top", padx=2, pady=5)
 
     remove_button = CTkButton(button_frame,
-                              text="Clear Cart",
+                              text="Limpiar carrito",
                               command=remove_from_cart,
                               fg_color="#FF0000",
                               hover_color="#FF3333",
@@ -159,7 +192,7 @@ def frame_orders(frame):
     remove_button.pack(side="left", padx=(0, 5), pady=10)
 
     finish_button = CTkButton(button_frame,
-                              text="Complete Purchase",
+                              text="Finalizar compra",
                               command=finalize_purchase,
                               fg_color="#008000",
                               hover_color="#007300",

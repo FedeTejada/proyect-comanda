@@ -45,8 +45,8 @@ def frame_modif_product(frame):
         Displays a context menu with options to modify or delete the product.
         """
         context_menu = Menu(frame, tearoff=0)
-        context_menu.add_command(label="Modify Product", command=lambda: modify_product(product))
-        context_menu.add_command(label="Delete Product", command=lambda: delete_product(product))
+        context_menu.add_command(label="Modificar el produccto ", command=lambda: modify_product(product))
+        context_menu.add_command(label="Eliminar el producto", command=lambda: delete_product(product))
         context_menu.post(event.x_root, event.y_root)
 
     def modify_product(product):
@@ -74,29 +74,29 @@ def frame_modif_product(frame):
                 image_path.set(image_file)
 
         top = CTkToplevel()
-        top.title("Modify Product")
+        top.title("Modificar Producto")
         top.minsize(500, 500)
 
 
         # Product Name entry
-        CTkLabel(top, text="Product Name:").pack(padx=20, pady=5)
+        CTkLabel(top, text="Nombre del producto:").pack(padx=20, pady=5)
         name_entry = CTkEntry(top)
         name_entry.pack(padx=10, pady=5)
 
         # Product Price entry
-        CTkLabel(top, text="Product Price:").pack(padx=20, pady=5)
+        CTkLabel(top, text="Precio del producto:").pack(padx=20, pady=5)
         price_entry = CTkEntry(top)
         price_entry.pack(padx=10, pady=5)
 
         # Product Image entry (optional)
-        CTkLabel(top, text="Product Image (Optional):").pack(padx=20, pady=5)
+        CTkLabel(top, text="Imagen del producto (Optional):").pack(padx=20, pady=5)
         image_path = CTkEntry(top, state='readonly')
         image_path.pack(padx=10, pady=5)
 
-        browse_button = CTkButton(top, text="Browse", command=browse_image)
+        browse_button = CTkButton(top, text="Explorar", command=browse_image)
         browse_button.pack(padx=20, pady=5)
 
-        save_button = CTkButton(top, text="Save", command=save_changes)
+        save_button = CTkButton(top, text="Guardar", command=save_changes)
         save_button.pack(padx=20, pady=20)
 
     def delete_product(product):
@@ -137,30 +137,30 @@ def frame_modif_product(frame):
 
         # Create the top-level window for adding a product
         top = CTkToplevel()
-        top.title("Add Product")
+        top.title("Agregar producto")
         top.minsize(500, 500)
         
         # Product Name entry
-        CTkLabel(top, text="Product Name:").pack(padx=20, pady=5)
+        CTkLabel(top, text="Nombre producto:").pack(padx=20, pady=5)
         name_entry = CTkEntry(top)
         name_entry.pack(padx=10, pady=5)
 
         # Product Price entry
-        CTkLabel(top, text="Product Price:").pack(padx=20, pady=5)
+        CTkLabel(top, text="Precio producto:").pack(padx=20, pady=5)
         price_entry = CTkEntry(top)
         price_entry.pack(padx=10, pady=5)
 
         # Product Image entry (optional)
-        CTkLabel(top, text="Product Image (Optional):").pack(padx=20, pady=5)
+        CTkLabel(top, text="Producto Imagen (Optional):").pack(padx=20, pady=5)
         image_path = CTkEntry(top, state='readonly')
         image_path.pack(padx=10, pady=5)
 
         # Browse button to select an image
-        browse_button = CTkButton(top, text="Browse", command=browse_image)
+        browse_button = CTkButton(top, text="Explorar", command=browse_image)
         browse_button.pack(padx=20, pady=5)
 
         # Save button to add the product
-        save_button = CTkButton(top, text="Save", command=save_product)
+        save_button = CTkButton(top, text="Guardar", command=save_product)
         save_button.pack(padx=20, pady=20)
 
     # Configure the main frame
@@ -177,8 +177,8 @@ def frame_modif_product(frame):
     
     # Create labels for the table header
     CTkLabel(headers_frame, text="ID", fg_color='#444', text_color='white', font=('TkDefaultFont', 14, 'bold')).grid(row=0, column=0, padx=(20, 20), sticky='w')
-    CTkLabel(headers_frame, text="PRODUCT", fg_color='#444', text_color='white', font=('TkDefaultFont', 14, 'bold')).grid(row=0, column=1, padx=(0, 20))
-    CTkLabel(headers_frame, text="PRICE", fg_color='#444', text_color='white', font=('TkDefaultFont', 14, 'bold')).grid(row=0, column=2, padx=(0, 20), sticky='e')
+    CTkLabel(headers_frame, text="PRODUCTO", fg_color='#444', text_color='white', font=('TkDefaultFont', 14, 'bold')).grid(row=0, column=1, padx=(0, 20))
+    CTkLabel(headers_frame, text="PRECIO", fg_color='#444', text_color='white', font=('TkDefaultFont', 14, 'bold')).grid(row=0, column=2, padx=(0, 20), sticky='e')
 
     # Create a scrollable frame to contain the product rows
     scrollable_frame = CTkScrollableFrame(frame, fg_color="#555", width=780, height=100)
@@ -192,7 +192,7 @@ def frame_modif_product(frame):
     buttons_frame.pack(fill='x', padx=10, pady=10)
 
     # Create "Add Product" button
-    add_button = CTkButton(buttons_frame, text="Add Product", font=('TkDefaultFont', 11, 'bold'), fg_color="#4CAF50", hover_color="#45A049", height=40, command=add_product)
+    add_button = CTkButton(buttons_frame, text="Agregar producto", font=('TkDefaultFont', 11, 'bold'), fg_color="#4CAF50", hover_color="#45A049", height=40, command=add_product)
     add_button.pack(side='right', padx=10)
     
     # Create "Remove Product" button

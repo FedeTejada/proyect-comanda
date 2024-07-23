@@ -7,6 +7,7 @@ db = session
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
+
 logger = logging.getLogger(__name__)
 
 # Service of the product: add, update, delete products

@@ -10,9 +10,9 @@ from service.config import frame_config
 from view.change_products import frame_modif_product
 
 
+
 # ------------------------------------------------------------------------------
 # FUNCTION TO CHANGE THE MAIN CONTENT
-
 def change_section(frame, seccion_funcion):
     """
     Clear the current frame and load a new section.
