@@ -2,3 +2,4 @@ pip install sqlalchemy
 pip install customtkinter
 pip install pillow
 pip install mysqlclient
+pip install pyinstaller

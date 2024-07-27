@@ -1,5 +1,5 @@
-from models.Product import Product
-from config.config import engine, session
+from src.models.Product import Product
+from src.config.config import engine, session
 from sqlalchemy.orm.exc import NoResultFound
 import logging
 

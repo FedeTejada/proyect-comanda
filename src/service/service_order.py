@@ -1,7 +1,7 @@
-from models.Order import Order
-from models.OrderProduct import OrderProduct
-from models.Product import Product
-from config.config import session
+from src.models.Order import Order
+from src.models.OrderProduct import OrderProduct
+from src.models.Product import Product
+from src.config.config import session
 import datetime
 
 db = session

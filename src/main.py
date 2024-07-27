@@ -3,11 +3,11 @@ import tkinter as tk
 import customtkinter
 from customtkinter import *
 from PIL import Image, ImageTk
-from service.home import frame_home
-from view.order import frame_orders, show_products
-from service.balance import frame_balance
-from service.config import frame_config
-from view.change_products import frame_modif_product
+from src.service.home import frame_home
+from src.view.order import frame_orders
+from src.service.balance import frame_balance
+from src.service.config import frame_config
+from src.view.change_products import frame_modif_product
 
 
 
@@ -61,13 +61,13 @@ frame_content.pack(side="right", expand=True, fill="both")
 # NAV BAR BUTTONS CONFIGURATION
 
 # Home Button
-home_button_img_pil = Image.open("./media/images/home_icon.png")
-home_button_img = CTkImage(home_button_img_pil)
+# home_button_img_pil = Image.open("./media/images/home_icon.png")
+# home_button_img = CTkImage(home_button_img_pil)
 
 home_button = CTkButton(
                 frame_nav,
                 text="",
-                image=home_button_img,
+                # image=home_button_img,
                 compound="left",
                 command=lambda: change_section(frame_content, frame_home),
                 width=160,

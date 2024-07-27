@@ -1,6 +1,6 @@
-from service.service_order import *
-from service.service_pro_ord import *
-from service.serviceProduct import *
+from src.service.service_order import *
+from src.service.service_pro_ord import *
+from src.service.serviceProduct import *
 import logging
 
 

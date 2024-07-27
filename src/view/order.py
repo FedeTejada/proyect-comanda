@@ -3,8 +3,8 @@ import tkinter as tk
 import time
 from tkinter import messagebox
 from customtkinter import CTkFrame, CTkButton, CTkInputDialog, CTkScrollableFrame
-from controller.OrderController import OrderController
-from service.serviceProduct import getProducts
+from src.controller.OrderController import OrderController
+from src.service.serviceProduct import getProducts
 from win32printing import Printer
 product_buttons = {}
 order_controller = OrderController()

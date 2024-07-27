@@ -1,7 +1,7 @@
 # change_product.py
 from customtkinter import CTk, CTkFrame, CTkButton, CTkLabel, CTkEntry, CTkScrollableFrame, CTkToplevel
 from tkinter import filedialog, Menu
-from service.serviceProduct import getProducts,updateProduct,deleteProduct, addProducts
+from src.service.serviceProduct import getProducts,updateProduct,deleteProduct, addProducts
 import os
 
 # ------------------------------------------------------------------------------
