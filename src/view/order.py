@@ -85,20 +85,18 @@ def finalize_purchase():
     # Get the total price from the label
     total_price = total_label.cget("text").split(": $")[1]
 
-    # Retrieve the selected products
-    selected_products = getProducts()
-
     # Print the order details
     with Printer(linegap=5) as printer:
         
         printer.text(f"--- {customer_name} ---", font_config=title_font)
         printer.text(" ")
 
-        for product_name in selected_products:
+        for product_name, quantity in order_controller.selected_products.items():
             # Find the product in the menu to get its price
-            if product_name in selected_products:
-                printer.text(f"{product_name.name} - ${product_name.price} x {order_controller.selected_products[product_name.name]}u", font_config=normal_font)
-                break
+            product = next((p for p in getProducts() if p.name == product_name), None)
+            if product:
+                printer.text(f"{product.name} - ${product.price} x {quantity}u", font_config=normal_font)
+                printer.text(" ")
         
         printer.text(" ")
         printer.text(f"HORA: {pickup_time}", font_config=normal_font)
@@ -109,7 +107,7 @@ def finalize_purchase():
         if observation:
             printer.text(f"OBS: {observation}", font_config=normal_font)
             printer.text(" ")
-            printer.text(f"${total_price}", font_config=title_font)
+        printer.text(f"${total_price}", font_config=title_font)
 
     # Show confirmation message
     messagebox.showinfo("Orden confirmada", "La compra fue confirmada")
