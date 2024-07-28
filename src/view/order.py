@@ -19,7 +19,6 @@ def add_to_cart(product):
             update_cart_display()
         except ValueError:
             messagebox.showerror("Error", "Ingrese una cantiad valida")
-
 def update_cart_display():
     cart_listbox.delete(0, tk.END)
     total_price = order_controller.get_total_price()
@@ -47,12 +46,12 @@ def finalize_purchase():
     """
     # Define font configurations
     title_font = {
-        "height": 16,
+        "height": 20,
         "weight": 800,
     }
 
     normal_font = {
-        "height": 12,
+        "height": 14,
     }
 
     # Collect customer details
@@ -91,18 +90,19 @@ def finalize_purchase():
 
     # Print the order details
     with Printer(linegap=5) as printer:
+        
         printer.text(f"--- {customer_name} ---", font_config=title_font)
         printer.text(" ")
 
         for product_name in selected_products:
             # Find the product in the menu to get its price
             if product_name in selected_products:
-                printer.text(f"{product_name.name} - ${product_name.price}", font_config=normal_font)
+                printer.text(f"{product_name.name} - ${product_name.price} x {order_controller.selected_products[product_name.name]}u", font_config=normal_font)
                 break
+        
         printer.text(" ")
         printer.text(f"HORA: {pickup_time}", font_config=normal_font)
         printer.text(" ")
-        printer.text(f"CADETE: {cadet_option}", font_config=normal_font)
         if cadet_address:
             printer.text(f"DIRECCIÓN: {cadet_address}", font_config=normal_font)
             printer.text(" ")
