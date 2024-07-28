@@ -91,9 +91,7 @@ def finalize_purchase():
     # Print the order details
     with Printer(linegap=5) as printer:
         
-        printer.text(f"--- {customer_name} ---
-                     
-                     ", font_config=title_font)
+        printer.text(f"--- {customer_name} ---", font_config=title_font)
         printer.text(" ")
 
         for product_name in selected_products:
