@@ -5,10 +5,6 @@ from src.service.serviceProduct import getProducts,updateProduct,deleteProduct, 
 import os
 
 # ------------------------------------------------------------------------------
-# PROVISIONAL VARIABLES
-# List of products (example data)
-
-# ------------------------------------------------------------------------------
 # CHANGE PRODUCTS FRAME
 def frame_modif_product(frame):
     """
