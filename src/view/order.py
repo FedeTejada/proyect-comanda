@@ -6,6 +6,10 @@ from customtkinter import CTkFrame, CTkButton, CTkInputDialog, CTkScrollableFram
 from src.controller.OrderController import OrderController
 from src.service.serviceProduct import getProducts
 from win32printing import Printer
+# from PIL import Image, ImageWin
+# import win32print
+# import win32ui
+
 product_buttons = {}
 order_controller = OrderController()
 

@@ -42,7 +42,7 @@ def frame_modif_product(frame):
         """
         context_menu = Menu(frame, tearoff=0)
         context_menu.add_command(label="Modificar el produccto ", command=lambda: modify_product(product))
-        context_menu.add_command(label="Eliminar el producto", command=lambda: delete_product(product))
+        context_menu.add_command(label="Eliminar el producto", command=lambda p=product: delete_product(p))
         context_menu.post(event.x_root, event.y_root)
 
     def modify_product(product):

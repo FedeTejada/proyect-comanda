@@ -2,14 +2,11 @@
 import tkinter as tk
 import customtkinter
 from customtkinter import *
-from PIL import Image, ImageTk
 from src.service.home import frame_home
 from src.view.order import frame_orders
 from src.service.balance import frame_balance
 from src.service.config import frame_config
 from src.view.change_products import frame_modif_product
-
-
 
 # ------------------------------------------------------------------------------
 # FUNCTION TO CHANGE THE MAIN CONTENT
@@ -25,7 +22,7 @@ def change_section(frame, seccion_funcion):
 # CONFIGURATION OF THE WINDOW
 
 root = customtkinter.CTk()
-root.title("Comandero")
+root.title("TIA CACHA")
 customtkinter.set_appearance_mode("system")  # Set the appearance mode to system default
 
 # Window dimensions
@@ -60,13 +57,9 @@ frame_content.pack(side="right", expand=True, fill="both")
 # ------------------------------------------------------------------------------
 # NAV BAR BUTTONS CONFIGURATION
 
-# Home Button
-# home_button_img_pil = Image.open("./media/images/home_icon.png")
-# home_button_img = CTkImage(home_button_img_pil)
-
 home_button = CTkButton(
                 frame_nav,
-                text="",
+                text="Home",
                 # image=home_button_img,
                 compound="left",
                 command=lambda: change_section(frame_content, frame_home),
