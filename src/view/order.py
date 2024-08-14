@@ -2,8 +2,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from customtkinter import CTkFrame, CTkButton, CTkInputDialog, CTkScrollableFrame
-from src.controller.OrderController import OrderController
-from src.service.serviceProduct import getProducts
+from controller.OrderController import OrderController
+from service.serviceProduct import getProducts
 from win32printing import Printer
 
 product_buttons = {}
