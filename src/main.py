@@ -2,11 +2,11 @@
 import tkinter as tk
 import customtkinter
 from customtkinter import *
-from src.service.home import frame_home
-from src.view.order import frame_orders
-from src.service.balance import frame_balance
-from src.service.config import frame_config
-from src.view.change_products import frame_modif_product
+from service.home import frame_home
+from view.order import frame_orders
+from service.balance import frame_balance
+from service.config import frame_config
+from view.products import frame_modif_product
 
 # ------------------------------------------------------------------------------
 # FUNCTION TO CHANGE THE MAIN CONTENT
