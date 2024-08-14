@@ -1,14 +1,10 @@
 # orders.py
 import tkinter as tk
-import time
 from tkinter import messagebox
 from customtkinter import CTkFrame, CTkButton, CTkInputDialog, CTkScrollableFrame
 from src.controller.OrderController import OrderController
 from src.service.serviceProduct import getProducts
 from win32printing import Printer
-# from PIL import Image, ImageWin
-# import win32print
-# import win32ui
 
 product_buttons = {}
 order_controller = OrderController()
